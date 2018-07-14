@@ -1,0 +1,57 @@
+﻿@using WorldCup.Web.Extensions;
+@model IEnumerable<WorldCup.Entities.Player>
+
+@{
+    ViewBag.Title = "Players Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Players</h2>
+<p style="display: inline-block; float: left;">
+    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</p>
+
+@Html.Partial("_Search")
+@Html.Partial("_SearchByPosition")
+@Html.Partial("_SearchByTeam")
+<hr style="clear: both;" />
+
+<div id="playersList" class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card mb-3">
+                    <h3 class="card-header" style="text-align: center">@Html.DisplayFor(modelItem => item.PlayerName)</h3>
+                    <img style="height: 100%; width: 100%; display: block;" src="@item.PictureUrl" alt="Picture of @item.PlayerName">
+                    <div class="card-body">
+                        <h5 class="card-title">Team: @Html.DisplayFor(modelItem => item.Team.Name)</h5>
+                        <h6 class="card-subtitle text-muted">@Html.DisplayNameFor(model => model.Position): @Extensions.GetDisplayName(item.Position)</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@Html.DisplayNameFor(model => model.Age):  @Html.DisplayFor(modelItem => item.Age)</li>
+                        <li class="list-group-item">@Html.DisplayNameFor(model => model.DateOfBirth): @Html.DisplayFor(modelItem => item.DateOfBirth)</li>
+                        <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsScored): @Html.DisplayFor(modelItem => item.GoalsScored)</li>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text text-truncate">@Html.DisplayFor(modelItem => item.Biography)</p>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Details", "Details", new { id = item.PlayerId }, new { @class = "text-success card-link" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PlayerId }, new { @class = "text-warning card-link" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PlayerId }, new { @class = "text-danger card-link" })
+                    </div>
+                    @*<div class="card-body">
+                        @Html.ActionLink("Like", "AddFavoritePlayer", "Users", new { id = item.PlayerId }, new { @class = "btn btn-outline-success" })
+                        @Html.ActionLink("Unlike", "RemoveFavoritePlayer", "Users", new { id = item.PlayerId }, new { @class = "btn btn-outline-warning" })
+                    </div>*@
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>No players found.</h3>
+    }
+</div>

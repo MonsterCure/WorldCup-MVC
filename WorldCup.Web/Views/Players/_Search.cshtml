@@ -1,0 +1,24 @@
+﻿@using (Ajax.BeginForm(
+    "Search",
+    "Players",
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "GET",
+        LoadingElementId = "ajax-loader",
+        UpdateTargetId = "playersList",
+        OnComplete = "ClearPlayersList",
+        OnSuccess = "DisplaySearchTerms"
+    }))
+{
+    <div style="display: inline-block; float: left; margin: 0px 30px;">
+        <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display:none" />
+        <div class="form-group">
+            <div class="">
+                <input id="searchByName" type="text" name="searchCriteria" class="form-control" />
+                <br />
+                <input type="submit" value="Search by name" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,73 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+h2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.jumbotron {
+    padding: 2em 4em;
+}
+
+.logo-title {
+    display: inline;
+    vertical-align: middle;
+    font-size: 4em;
+    padding: 0 30px;
+}
+
+.navbar-brand {
+    font-size: 2em;
+    vertical-align: middle;
+}
+
+.nav-item {
+    font-size: 1.6em;
+    padding: 1em;
+}
+
+#logo {
+    width: 100px;
+}
+
+#logo-button {
+    margin: 0px 20px;
+    padding: 5px 10px;
+    border: none;
+    background-color: transparent;
+}
+
+#logo-jumbotron {
+    width: 150px;
+    margin: 10px 20px;
+    display: inline;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 65px;
+    right: 65px;
+    z-index: 9999;
+    width: 65px;
+    height: 65px;
+    font-size: 2em;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+
+a#back-to-top:hover {
+    background-color: rgba(85, 153, 202, 0.62) !important;
+}
+
+#back-to-top.show {
+    opacity: 1;
+}

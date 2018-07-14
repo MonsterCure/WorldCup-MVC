@@ -1,0 +1,75 @@
+﻿@model WorldCup.Entities.Match
+
+@{
+    ViewBag.Title = "Add match";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add match</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Match</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.MatchTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MatchTime, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.MatchTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MatchType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.MatchType, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MatchType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.Group, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Group, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StadiumLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.StadiumLocation, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.StadiumLocation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/themes/base/jqueryui")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: 'dd MM yy' });
+        })
+    </script>
+}

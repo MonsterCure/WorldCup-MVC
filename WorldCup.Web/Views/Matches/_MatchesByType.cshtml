@@ -1,0 +1,30 @@
+﻿@using (Ajax.BeginForm(
+    "MatchesByType",
+    "Matches",
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "GET",
+        LoadingElementId = "ajax-loader",
+        UpdateTargetId = "matchesList"
+    }))
+{
+    <div style="display: inline-block; float: left; margin: 0px 30px;">
+        <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display:none" />
+        <div class="form-group">
+            <div class="">
+                <select class="form-control" id="selectByType" name="matchType">
+                    <option value="GroupMatch">Group match</option>
+                    <option value="RoundOf16">Round of 16</option>
+                    <option value="QuarterFinal">Quarter-final</option>
+                    <option value="SemiFinal">Semi-final</option>
+                    <option value="ThirdPlace">Play off for third place</option>
+                    <option value="Final">Final</option>
+                </select>
+                <br />
+                <input type="submit" value="By type" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}
+

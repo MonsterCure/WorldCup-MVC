@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - World Cup App</title>
+    <link id="favicon" rel="shortcut icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/app.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button id="logo-button" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"><img id="logo" src="https://api.fifa.com/api/v1/picture/tournaments-sq-4/254645_w" alt="Logo" /></span>
+                </button>
+                @Html.ActionLink("World Cup", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Teams", "Index", "Teams", new { }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Matches", "Index", "Matches", new { }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Players", "Index", "Players", new { }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Groups", "GroupsView", "Teams", new { }, new { @class = "nav-link" })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - World Cup App</p>
+        </footer>
+        <a href="#" id="back-to-top" title="Back to top" style="background: rgba(0, 0, 0, 0.03);">&uarr;</a>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/Scripts/backToTop.js"></script>
+</body>
+</html>

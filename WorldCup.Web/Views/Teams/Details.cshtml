@@ -1,0 +1,80 @@
+﻿@using WorldCup.Web.Extensions
+@model WorldCup.Entities.Team
+
+@{
+    ViewBag.Title = "Team Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Team details</h2>
+
+<div>
+    <div class="card mb-3">
+        <h3 class="card-header" style="text-align: center;">@Html.DisplayFor(model => model.Name)</h3>
+        <img style="height: 100%; width: 100%; max-width: 500px; display: block; margin: 10px auto;" src="@Model.FlagUrl" alt="Flag of @Model.Name">
+        <hr />
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.Group): @Html.DisplayFor(model => model.Group)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.Continent): @Extensions.GetDisplayName(Model.Continent)</li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesPlayed): @Html.DisplayFor(model => model.MatchesPlayed)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesWon): @Html.DisplayFor(model => model.MatchesWon)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesLost): @Html.DisplayFor(model => model.MatchesLost)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesDrawn): @Html.DisplayFor(model => model.MatchesDrawn)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsFor): @Html.DisplayFor(model => model.GoalsFor)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsAgainst): @Html.DisplayFor(model => model.GoalsAgainst)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsDifference): @Html.DisplayFor(model => model.GoalsDifference)</li>
+                <li class="list-group-item">@Html.DisplayNameFor(model => model.Points): @Html.DisplayFor(model => model.Points)</li>
+            </ul>
+        </div>
+        <div class="card-body">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }, new { @class = "text-warning card-link" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.TeamId }, new { @class = "text-danger card-link" })
+            @Html.ActionLink("Back to Teams Index", "Index", new { }, new { @class = "text-primary card-link" })
+        </div>
+        @*<div class="card-body">
+            @Html.ActionLink("Like", "AddFavoriteTeam", "Users", new { id = Model.TeamId }, new { @class = "btn btn-outline-success" })
+            @Html.ActionLink("Unlike", "RemoveFavoriteTeam", "Users", new { id = Model.TeamId }, new { @class = "btn btn-outline-warning" })
+        </div>*@
+    </div>
+</div>
+<div class="card mb-3">
+    <h3 class="card-header" style="text-align: center;">Players</h3>
+    <br />
+    <div class="row" style="padding: 0 20px;">
+        @foreach (var item in Model.Players.ToList())
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card mb-3">
+                    <h3 class="card-header" style="text-align: center">@Html.DisplayFor(modelItem => item.PlayerName)</h3>
+                    <img style="height: 100%; width: 100%; display: block;" src="@item.PictureUrl" alt="Picture of @item.PlayerName">
+                    <div class="card-body">
+                        <h5 class="card-title">Team: @Html.DisplayFor(modelItem => item.Team.Name)</h5>
+                        <h6 class="card-subtitle text-muted">@Html.DisplayNameFor(modelItem => item.Position): @Extensions.GetDisplayName(item.Position)</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@Html.DisplayNameFor(modelItem => item.Age):  @Html.DisplayFor(modelItem => item.Age)</li>
+                        <li class="list-group-item">@Html.DisplayNameFor(modelItem => item.DateOfBirth): @Html.DisplayFor(modelItem => item.DateOfBirth)</li>
+                        <li class="list-group-item">@Html.DisplayNameFor(modelItem => item.GoalsScored): @Html.DisplayFor(modelItem => item.GoalsScored)</li>
+                    </ul>
+                    <div class="card-body">
+                        <p class="card-text text-truncate">@Html.DisplayFor(modelItem => item.Biography)</p>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Details", "Details", "Players", new { id = item.PlayerId }, new { @class = "text-success card-link" })
+                        @Html.ActionLink("Edit", "Edit", "Players", new { id = item.PlayerId }, new { @class = "text-warning card-link" })
+                        @Html.ActionLink("Delete", "Delete", "Players", new { id = item.PlayerId }, new { @class = "text-danger card-link" })
+                    </div>
+                    @*<div class="card-body">
+                        @Html.ActionLink("Like", "AddFavoritePlayer", "Users", new { id = item.PlayerId }, new { @class = "btn btn-outline-success" })
+                        @Html.ActionLink("Unlike", "RemoveFavoritePlayer", "Users", new { id = item.PlayerId }, new { @class = "btn btn-outline-warning" })
+                    </div>*@
+                </div>
+            </div>
+        }
+    </div>
+</div>

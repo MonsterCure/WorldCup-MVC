@@ -1,0 +1,57 @@
+﻿@using WorldCup.Web.Extensions
+@model IEnumerable<WorldCup.Entities.Team>
+
+@{
+    ViewBag.Title = "GetFavoriteTeams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your profile page</h2>
+
+<p style="display: inline-block; float: left; margin: 0 20px;">
+    @Html.ActionLink("Favorite players", "GetFavoritePlayers", "Users", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</p>
+<p style="display: inline-block; float: left; margin: 0 20px;">
+    @Html.ActionLink("Favorite teams", "GetFavoriteTeams", "Users", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</p>
+<p style="display: inline-block; float: left; margin: 0 20px;">
+    @Html.ActionLink("Favorite matches", "GetFavoriteMatches", "Users", new { area = "" }, new { @class = "btn btn-outline-primary" })
+</p>
+<br style="clear: both;" />
+
+<h2>Favorite teams</h2>
+
+<div class="list-group">
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card mb-3">
+                    <h3 class="card-header" style="text-align: center">@Html.DisplayFor(modelItem => item.Name)</h3>
+                    <br />
+                    <img style="height: 100%; width: 100%; display: block;" src="@item.FlagUrl" alt="Flag of @item.Name">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.Group): @Html.DisplayFor(modelItem => item.Group)</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.Continent): @Extensions.GetDisplayName(item.Continent)</li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Details", "Details", "Teams", new { id = item.TeamId }, new { @class = "text-success card-link" })
+                        @Html.ActionLink("Edit", "Edit", "Teams", new { id = item.TeamId }, new { @class = "text-warning card-link" })
+                        @Html.ActionLink("Delete", "Delete", "Teams", new { id = item.TeamId }, new { @class = "text-danger card-link" })
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Remove from favorites", "RemoveFavoriteTeam", "Users", new { id = item.TeamId }, new { @class = "text-warning card-link" })
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>No teams found.</h3>
+    }
+</div>

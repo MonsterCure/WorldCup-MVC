@@ -1,0 +1,22 @@
+﻿@using (Ajax.BeginForm(
+    "MatchesByTeam",
+    "Matches",
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "GET",
+        LoadingElementId = "ajax-loader",
+        UpdateTargetId = "matchesList"
+    }))
+{
+    <div style="display: inline-block; float: left; margin: 0px 30px;">
+        <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display:none" />
+        <div class="form-group">
+            <div class="">
+                <input type="text" name="teamName" class="form-control" />
+                <br />
+                <input type="submit" value="By team" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}

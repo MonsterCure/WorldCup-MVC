@@ -1,0 +1,38 @@
+﻿@using (Ajax.BeginForm(
+    "MatchesByDate",
+    "Matches",
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "GET",
+        LoadingElementId = "ajax-loader",
+        UpdateTargetId = "matchesList"
+    }))
+{
+    <div style="display: inline-block; float: left; margin: 0px 30px;">
+        <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display:none" />
+        <div class="form-group">
+            <div class="">
+                <input type="date" name="matchDate" class="form-control datepicker" />
+                <br />
+                <input type="submit" value="By date" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mytable').datatable();
+            console.log('run');
+        });
+
+    </script>
+
+    @Scripts.Render("~/bundles/datatablesjs")
+}
+
+@Styles.Render("~/Content/datatablescss")
+
+

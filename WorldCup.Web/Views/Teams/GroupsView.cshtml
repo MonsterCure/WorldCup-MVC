@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WorldCup.Entities.Team>
+
+@{
+    ViewBag.Title = "Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Groups</h2>
+
+@Html.Partial("_GroupsPartialView")
+<hr style="clear: both;" />
+
+<div id="groups">
+    @if (Model.Count() > 4) //4 is the number of countries per group
+    {
+        <h3>All teams:</h3>
+    }
+    @if (Model.Count() == 4)
+    {
+        <h3>Group @Model.First().Group.ToString()</h3>
+    }
+    <table id="groups-table" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th>Goals for</th>
+                <th>Goals against</th>
+                <th>Goal difference</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td style="width: 300px;">
+                            <h3 class="mb-1"><img style="height: 30px; width: auto; display: inline-block;" src="@item.FlagUrl" alt="Picture of @item.Name"> @Html.DisplayFor(modelItem => item.Name)</h3>
+                        </td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.MatchesPlayed)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.MatchesWon)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.MatchesDrawn)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.MatchesLost)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.GoalsFor)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.GoalsAgainst)</span></td>
+                        <td><span style="font-size: 32px;">@Html.DisplayFor(modelItem => item.GoalsDifference)</span></td>
+                        <td><span style="font-size: 32px; font-weight: bold">@Html.DisplayFor(modelItem => item.Points)</span></td>
+                    </tr>
+                </tbody>
+            }
+        }
+        else
+        {
+            <tr></tr>
+        }
+    </table>
+</div>
+
+
+
+@*@Styles.Render("~/Content/datatablescss")*@
+
+@*@section scripts{
+    @Scripts.Render("~/bundles/datatablesjs")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('#groups-table').DataTable();
+        });
+    </script>
+}*@
+

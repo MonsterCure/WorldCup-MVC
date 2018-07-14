@@ -1,0 +1,28 @@
+﻿@using WorldCup.Entities;
+@using (Ajax.BeginForm(
+    "SearchByContinent",
+    "Teams",
+    new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "GET",
+        LoadingElementId = "ajax-loader",
+        UpdateTargetId = "teamsList"
+    }))
+{
+    <div style="display: inline-block; float: left; margin: 0px 30px;">
+        <img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display:none" />
+        <div class="form-group" style="display: flex; align-items: center;">
+            <select class="form-control" name="continent" style="display: inline-block; width: 120px; margin: 0 10px;">
+                <option value="Asia">Asia</option>
+                <option value="Africa">Africa</option>
+                <option value="NorthAmerica">North America, Central America and the Caribbean</option>
+                <option value="SouthAmerica">South America</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Europe">Europe</option>
+            </select>
+            <br />
+            <input type="submit" value="By continent" class="btn btn-outline-primary" style="display: inline-block; margin: 0 10px;"/>
+        </div>
+    </div>
+}

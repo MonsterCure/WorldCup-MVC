@@ -1,0 +1,40 @@
+﻿@using WorldCup.Web.Extensions;
+@model WorldCup.Entities.Player
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete player</h2>
+<hr />
+<h3>Are you sure you want to delete this player?</h3>
+<br />
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class="btn btn-outline-primary"})
+        </div>
+    }
+</div>
+<hr />
+<div class="card mb-3">
+    <h3 class="card-header" style="text-align: center;">@Html.DisplayFor(model => model.PlayerName)</h3>
+    <img class="player-details-image" style="height: 100%; width: 100%; max-width: 500px; display: block; margin: 10px auto; border: 1px solid #cac5ba; border-radius: 2px;" src="@Model.PictureUrl" alt="Picture of @Model.PlayerName">
+    <div class="card-body">
+        <h5 class="card-title">Team: @Html.DisplayFor(model => model.Team.Name)</h5>
+        <h6 class="card-subtitle text-muted">@Html.DisplayNameFor(model => model.Position): @Extensions.GetDisplayName(Model.Position)</h6>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Html.DisplayNameFor(model => model.Age):  @Html.DisplayFor(model => model.Age)</li>
+        <li class="list-group-item">@Html.DisplayNameFor(model => model.DateOfBirth): @Html.DisplayFor(model => model.DateOfBirth)</li>
+        <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsScored): @Html.DisplayFor(model => model.GoalsScored)</li>
+    </ul>
+    <div class="card-body">
+        <p class="card-text">@Html.DisplayFor(model => model.Biography)</p>
+    </div>
+</div>

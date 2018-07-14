@@ -1,0 +1,71 @@
+﻿@using WorldCup.Web.Extensions
+@model WorldCup.Entities.Team
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete team</h2>
+<hr />
+<h3>Are you sure you want to delete this?</h3>
+<br />
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-outline-primary" })
+        </div>
+    }
+</div>
+<hr />
+<div class="card mb-3">
+    <h3 class="card-header" style="text-align: center;">@Html.DisplayFor(model => model.Name)</h3>
+    <img style="height: 100%; width: 100%; max-width: 500px; display: block; margin: 10px auto;" src="@Model.FlagUrl" alt="Flag of @Model.Name">
+    <hr />
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.Group): @Html.DisplayFor(model => model.Group)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.Continent): @Extensions.GetDisplayName(Model.Continent)</li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesPlayed): @Html.DisplayFor(model => model.MatchesPlayed)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesWon): @Html.DisplayFor(model => model.MatchesWon)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesLost): @Html.DisplayFor(model => model.MatchesLost)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.MatchesDrawn): @Html.DisplayFor(model => model.MatchesDrawn)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsFor): @Html.DisplayFor(model => model.GoalsFor)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsAgainst): @Html.DisplayFor(model => model.GoalsAgainst)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.GoalsDifference): @Html.DisplayFor(model => model.GoalsDifference)</li>
+            <li class="list-group-item">@Html.DisplayNameFor(model => model.Points): @Html.DisplayFor(model => model.Points)</li>
+        </ul>
+    </div>
+</div>
+@*<div class="card mb-3">
+    <h3 class="card-header">@Html.DisplayNameFor(model => model.GroupMatches)</h3>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model.GroupMatches)
+            {
+                <li class="list-group-item">
+                    @Extensions.MatchToString(item);
+                </li>
+            }
+        </ul>
+    </div>
+    <h3 class="card-header">@Html.DisplayNameFor(model => model.OtherMatches)</h3>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model.OtherMatches)
+            {
+                <li class="list-group-item">
+                    @Extensions.MatchToString(item);
+                </li>
+            }
+        </ul>
+    </div>
+</div>*@
